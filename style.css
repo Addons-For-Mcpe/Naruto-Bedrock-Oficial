@@ -1,0 +1,45 @@
+body{
+    background: rgb(255, 255, 255);
+    color:rgb(0, 0, 0);
+    font-family: arial, sans-serf;;
+    border-image-width: auto;
+}
+
+.btn{
+    padding: 10px 10px;
+    width: 100px;
+    color:rgb(0, 0, 0);
+    background-color: rgb(20, 190, 57);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;  
+    
+}
+
+
+.btn:hover{
+    background: rgb(20, 131, 44);;
+    transition: background 1s;
+}
+
+
+.btn2{
+    padding: 10px 10px;
+    width: 100px;
+    color:rgb(0, 0, 0);
+    background-color: rgb(20, 190, 57);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;  
+    
+}
+
+
+.btn2:hover{
+    background: rgb(20, 131, 44);;
+    transition: background 1s;
+}
