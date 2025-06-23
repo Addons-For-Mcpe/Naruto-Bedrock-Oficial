@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* Seu CSS continua aqui... (não precisa mudar nada no CSS) */
         /* === CONFIGURAÇÕES GLOBAIS E VARIÁVEIS === */
         * {
             padding: 0;
@@ -263,7 +262,7 @@
         }
 
         .main-logo {
-            width: 150px;
+            width: 250px; /* <--- VALOR ALTERADO */
             height: auto;
             filter: drop-shadow(var(--glow-yellow)) drop-shadow(0 0 40px rgba(255, 216, 44, 0.8));
             transition: all 0.3s ease;
@@ -286,6 +285,7 @@
             filter: drop-shadow(var(--glow-red)) drop-shadow(0 0 80px rgba(218, 36, 72, 1));
         }
 
+        /* O seletor .main-logo-text pode ser removido, mas não há problema em deixá-lo */
         .main-logo-text {
             font-family: 'Orbitron', monospace;
             font-size: clamp(1.5rem, 3vw, 2.5rem);
@@ -460,7 +460,7 @@
             }
             
             .main-logo {
-                width: 120px;
+                width: 180px; /* Ajuste para telas menores também */
             }
             
             .main-logo-text {
@@ -530,7 +530,6 @@
     <div id="app">
         <header class="animate-fade-in-up">
             <div class="logo-container">
-                <!-- LOGO DO CABEÇALHO ALTERADA -->
                 <img src="imagens/logo.png" alt="Logo do Mod">
                 <span class="logo-text">NARUTO 5D</span>
             </div>
@@ -553,9 +552,8 @@
         <main>
             <div class="main_info animate-fade-in-left">
                 <div class="main-logo-container">
-                    <!-- LOGO PRINCIPAL ALTERADA -->
+                    <!-- TEXTO REMOVIDO DAQUI -->
                     <img src="imagens/logo.png" alt="Naruto 5D Logo" class="main-logo">
-                    <span class="main-logo-text">NARUTO 5D<br>SOULSLIKE</span>
                 </div>
                 
                 <p>
