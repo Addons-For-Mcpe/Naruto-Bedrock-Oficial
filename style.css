@@ -242,56 +242,6 @@ main {
     100% { opacity: 0.8; transform: scale(1.05); }
 }
 
-/* === LOGO PRINCIPAL === */
-.main-logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 40px;
-    position: relative;
-}
-
-.main-logo {
-    width: 200px;
-    height: 200px;
-    filter: drop-shadow(var(--glow-yellow));
-    transition: all 0.5s ease;
-    animation: logoFloat 3s ease-in-out infinite alternate;
-}
-
-.main-logo:hover {
-    transform: scale(1.1) rotate(10deg);
-    filter: drop-shadow(var(--glow-red));
-}
-
-@keyframes logoFloat {
-    0% { 
-        transform: translateY(0px) rotate(0deg); 
-        filter: drop-shadow(0 0 20px rgba(255, 216, 44, 0.5));
-    }
-    100% { 
-        transform: translateY(-10px) rotate(5deg); 
-        filter: drop-shadow(0 0 30px rgba(255, 216, 44, 0.8));
-    }
-}
-
-.main-logo-container::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, 
-        rgba(255, 216, 44, 0.1) 0%, 
-        rgba(218, 36, 72, 0.1) 50%, 
-        transparent 70%);
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    animation: rotate 15s linear infinite;
-    z-index: -1;
-}
-
 .title {
     font-family: 'Orbitron', monospace;
     font-size: clamp(2.5rem, 5vw, 4rem);
