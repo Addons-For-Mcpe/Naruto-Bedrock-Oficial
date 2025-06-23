@@ -1,113 +1,472 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naruto 5D - SoulsLike</title>
-    <link rel="shortcut icon" href="icon.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- Partículas animadas -->
-    <div class="particles" id="particles"></div>
+/* === CONFIGURAÇÕES GLOBAIS E VARIÁVEIS === */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --text: #EDF1F7;
+    --red: #da2448ff;
+    --yellow: rgb(255, 216, 44);
+    --orange: #ff6b35;
+    --dark-blue: #0a0c10;
+    --gradient-primary: linear-gradient(135deg, #ff6b35 0%, #da2448ff 50%, #8b1538 100%);
+    --gradient-secondary: linear-gradient(135deg, #ffd82c 0%, #ff6b35 100%);
+    --glow-yellow: 0 0 20px rgba(255, 216, 44, 0.5);
+    --glow-red: 0 0 30px rgba(218, 36, 72, 0.6);
+}
+
+body, button, a {
+    color: var(--text);
+    font: 400 1rem "Mukta", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+button:hover, a:hover {
+    cursor: pointer;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 32px;
+    position: relative;
+}
+
+/* === PARTÍCULAS ANIMADAS === */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--yellow);
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: float 6s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+    50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+}
+
+/* === IMAGEM DE FUNDO APRIMORADA === */
+#background {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(45deg, #0a0c10 0%, #1a1d24 50%, #0a0c10 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+    z-index: -2;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+#background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(218, 36, 72, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 216, 44, 0.05) 0%, transparent 50%);
+    animation: pulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+#background::after {
+    content: '';
+    width: inherit;
+    height: inherit;
+    position: fixed;
+    background: linear-gradient(60deg, rgba(10, 12, 16, 0.9) 15%, rgba(10, 12, 16, 0.7) 45%, rgba(10, 12, 16, 0.9) 80%);
+    z-index: -1;
+}
+
+/* === CABEÇALHO APRIMORADO === */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1440px;
+    padding: 24px 0;
+    backdrop-filter: blur(10px);
+    border-radius: 0 0 20px 20px;
+    background: rgba(10, 12, 16, 0.3);
+    border: 1px solid rgba(255, 216, 44, 0.1);
+    z-index: 10;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.logo-container img {
+    width: 70px;
+    height: auto;
+    filter: drop-shadow(var(--glow-yellow));
+    transition: all 0.3s ease;
+}
+
+.logo-container img:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(var(--glow-red));
+}
+
+.logo-text {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: 1.2rem;
+    background: var(--gradient-secondary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+}
+
+.navigation_link {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    position: relative;
+    transition: all 0.3s ease;
+    padding: 8px 16px;
+    border-radius: 25px;
+    background: rgba(255, 216, 44, 0.05);
+    backdrop-filter: blur(5px);
+}
+
+.navigation_link:hover {
+    color: var(--yellow);
+    background: rgba(255, 216, 44, 0.1);
+    box-shadow: var(--glow-yellow);
+    transform: translateY(-2px);
+}
+
+.navigation_social svg {
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 5px rgba(255, 216, 44, 0.3));
+}
+
+.navigation_social a:hover svg {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.2);
+    color: var(--yellow);
+    filter: drop-shadow(var(--glow-yellow));
+}
+
+/* === CONTEÚDO PRINCIPAL APRIMORADO === */
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1440px;
+    padding: 60px 0;
+    z-index: 5;
+}
+
+.main_info {
+    width: 100%;
+    max-width: 580px;
+    position: relative;
+}
+
+.main_info::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: linear-gradient(135deg, 
+        rgba(255, 216, 44, 0.1) 0%, 
+        rgba(218, 36, 72, 0.1) 50%, 
+        rgba(255, 107, 53, 0.1) 100%);
+    border-radius: 30px;
+    filter: blur(20px);
+    z-index: -1;
+    animation: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    0% { opacity: 0.5; transform: scale(0.95); }
+    100% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+    text-shadow: 0 0 30px rgba(255, 216, 44, 0.5);
+    animation: titlePulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes titlePulse {
+    0% { filter: brightness(1) drop-shadow(0 0 10px rgba(255, 216, 44, 0.5)); }
+    100% { filter: brightness(1.2) drop-shadow(0 0 20px rgba(255, 216, 44, 0.8)); }
+}
+
+.main_info p {
+    font-size: 18px;
+    line-height: 1.8;
+    margin: 30px 0 40px;
+    opacity: 0.9;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    backdrop-filter: blur(5px);
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(10, 12, 16, 0.4);
+    border: 1px solid rgba(255, 216, 44, 0.1);
+}
+
+/* === BOTÕES APRIMORADOS === */
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.buttons-container a {
+    width: 100%;
+    max-width: 320px;
+    padding: 16px 24px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+    border: 2px solid transparent;
+}
+
+.buttons-container a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.buttons-container a:hover::before {
+    left: 100%;
+}
+
+.btn-principal {
+    background: var(--gradient-primary);
+    box-shadow: var(--glow-red);
+    transform: perspective(500px) rotateX(5deg);
+}
+
+.btn-principal:hover {
+    transform: perspective(500px) rotateX(0deg) translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(218, 36, 72, 0.4), var(--glow-red);
+}
+
+.btn-secundario {
+    background: rgba(255, 216, 44, 0.1);
+    border: 2px solid var(--yellow);
+    box-shadow: var(--glow-yellow);
+    transform: perspective(500px) rotateX(5deg);
+}
+
+.btn-secundario:hover {
+    background: var(--gradient-secondary);
+    color: #111;
+    transform: perspective(500px) rotateX(0deg) translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(255, 216, 44, 0.4), var(--glow-yellow);
+}
+
+/* === IMAGENS APRIMORADAS === */
+.img_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    position: relative;
+}
+
+.img_container img {
+    filter: drop-shadow(0 0 30px rgba(255, 216, 44, 0.3));
+    transition: all 0.3s ease;
+}
+
+.img_container:hover img {
+    transform: scale(1.05) rotate(2deg);
+    filter: drop-shadow(0 0 40px rgba(255, 216, 44, 0.5));
+}
+
+.character-image {
+    position: relative;
+    z-index: 2;
+}
+
+.character-image::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, 
+        rgba(255, 216, 44, 0.1) 0%, 
+        rgba(218, 36, 72, 0.1) 50%, 
+        transparent 70%);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    animation: rotate 10s linear infinite;
+    z-index: -1;
+}
+
+@keyframes rotate {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* === RESPONSIVIDADE APRIMORADA === */
+@media (max-width: 1024px) {
+    main {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        gap: 3rem;
+    }
     
-    <!-- Fundo da página -->
-    <div id="background"></div>
+    .main_info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .character-image {
+        display: none;
+    }
+}
 
-    <div id="app">
-        <header class="animate-fade-in-up">
-            <div class="logo-container">
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzAiIGhlaWdodD0iNzAiIHZpZXdCb3g9IjAgMCA3MCA3MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzUiIGN5PSIzNSIgcj0iMzUiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik0yNSAxNUw0NSAzNUwyNSA1NVYxNVoiIGZpbGw9IiNGRkY2RTciLz4KPGR2Zz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDBfbGluZWFyXzFfMSIgeDE9IjAiIHkxPSIwIiB4Mj0iNzAiIHkyPSI3MCI+CjxzdG9wIHN0b3AtY29sb3I9IiNGRkQ4MkMiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjREEyNDQ4Ii8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+" alt="Logo do Mod">
-                <span class="logo-text">NARUTO 5D</span>
-            </div>
-            
-            <ul class="navigation">
-                <li>
-                    <a href="#" class="navigation_link">Home</a>
-                </li>
-            </ul>
+@media (max-width: 768px) {
+    header {
+        padding: 16px 20px;
+        border-radius: 0 0 15px 15px;
+    }
+    
+    .navigation {
+        display: none;
+    }
+    
+    .title {
+        font-size: 2.5rem;
+    }
+    
+    .buttons-container a {
+        max-width: 280px;
+        font-size: 16px;
+    }
+}
 
-            <div class="navigation_social">
-                <a href="https://www.youtube.com/c/porkinplay" target="_blank" title="Canal do Criador">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
-                        <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
-                    </svg>
-                </a>
-            </div>
-        </header>
+/* === ANIMAÇÕES DE ENTRADA === */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-        <main>
-            <div class="main_info animate-fade-in-left">
-                <h1 class="title">NARUTO 5D<br>SoulsLike</h1>
-                
-                <p>
-                    Sua jornada no mundo shinobi está prestes a começar! Com o <strong>Naruto 5D SoulsLike</strong>, a experiência é elevada a um novo nível de desafio e imersão. Baixe agora os pacotes e prepare-se para a aventura!
-                </p>
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
 
-                <div class="buttons-container">
-                    <a class="btn-principal" href="https://link-hub.net/1194596/naruto-5d-kyuubi-update" target="_blank">📥 Behavior Pack</a>
-                    <a class="btn-principal" href="https://link-hub.net/1194596/naruto-5d-resource-kurama" target="_blank">📥 Resource Pack</a>
-                    <a class="btn-secundario" href="https://addons-for-mcpe.github.io/Download/" target="_blank">Versão Antiga</a>
-                </div>
-            </div>
-            
-            <div class="img_container character-image animate-fade-in-right">
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgwIiBoZWlnaHQ9IjQ4MCIgdmlld0JveD0iMCAwIDQ4MCA0ODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0ODAiIGhlaWdodD0iNDgwIiByeD0iMjQwIiBmaWxsPSJ1cmwoI2dyYWRpZW50MF9saW5lYXJfMV8yKSIvPgo8Y2lyY2xlIGN4PSIyNDAiIGN5PSIyNDAiIHI9IjE4MCIgZmlsbD0idXJsKCNncmFkaWVudDFfcmFkaWFsXzFfMikiIG9wYWNpdHk9IjAuOCIvPgo8cGF0aCBkPSJNMTYwIDEyMEwyNDAgMjAwTDMyMCAxMjBMMjQwIDIwMEwzMjAgMjgwTDI0MCAyMDBMMTYwIDI4MEwyNDAgMjAwVjEyMFoiIGZpbGw9IiNGRkQ4MkMiLz4KPGR2Zz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDBfbGluZWFyXzFfMiIgeDE9IjAiIHkxPSIwIiB4Mj0iNDgwIiB5Mj0iNDgwIj4KPHN0b3Agc3RvcC1jb2xvcj0iI0ZGNkIzNSIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNEQTI0NDgiLz4KPC9saW5lYXJHcmFkaWVudD4KPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkaWVudDFfcmFkaWFsXzFfMiIgY3g9IjAuNSIgY3k9IjAuNSIgcj0iMC41Ij4KPHN0b3Agc3RvcC1jb2xvcj0iI0ZGRDgyQyIgc3RvcC1vcGFjaXR5PSIwLjMiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjREEyNDQ4IiBzdG9wLW9wYWNpdHk9IjAuMSIvPgo8L3JhZGlhbEdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPg==" alt="Personagem Naruto" width="480px">
-            </div>
-        </main>
-    </div>
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
 
-    <script>
-        // Criar partículas animadas
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
+.animate-fade-in-up {
+    animation: fadeInUp 1s ease-out;
+}
 
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 6 + 's';
-                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
+.animate-fade-in-left {
+    animation: fadeInLeft 1s ease-out 0.2s both;
+}
 
-        // Efeito parallax suave
-        function handleParallax() {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.character-image img');
-            
-            parallaxElements.forEach(element => {
-                const speed = 0.1;
-                element.style.transform = `translateY(${scrolled * speed}px) scale(1.05)`;
-            });
-        }
-
-        // Inicializar
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-            
-            // Adicionar listener para parallax
-            window.addEventListener('scroll', handleParallax);
-            
-            // Adicionar efeito de hover nos botões
-            const buttons = document.querySelectorAll('.buttons-container a');
-            buttons.forEach(button => {
-                button.addEventListener('mouseenter', function() {
-                    this.style.transform = this.classList.contains('btn-principal') 
-                        ? 'perspective(500px) rotateX(0deg) translateY(-8px) scale(1.08)' 
-                        : 'perspective(500px) rotateX(0deg) translateY(-8px) scale(1.08)';
-                });
-                
-                button.addEventListener('mouseleave', function() {
-                    this.style.transform = 'perspective(500px) rotateX(5deg) translateY(0) scale(1)';
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+.animate-fade-in-right {
+    animation: fadeInRight 1s ease-out 0.4s both;
+}
