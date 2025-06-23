@@ -252,17 +252,50 @@
             100% { opacity: 0.8; transform: scale(1.05); }
         }
 
-        .title {
+        /* === LOGO PRINCIPAL NO CENTRO === */
+        .main-logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .main-logo {
+            width: 150px;
+            height: auto;
+            filter: drop-shadow(var(--glow-yellow)) drop-shadow(0 0 40px rgba(255, 216, 44, 0.8));
+            transition: all 0.3s ease;
+            animation: mainLogoPulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes mainLogoPulse {
+            0% { 
+                filter: drop-shadow(var(--glow-yellow)) drop-shadow(0 0 40px rgba(255, 216, 44, 0.8));
+                transform: scale(1);
+            }
+            100% { 
+                filter: drop-shadow(var(--glow-red)) drop-shadow(0 0 60px rgba(218, 36, 72, 0.9));
+                transform: scale(1.05);
+            }
+        }
+
+        .main-logo:hover {
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(var(--glow-red)) drop-shadow(0 0 80px rgba(218, 36, 72, 1));
+        }
+
+        .main-logo-text {
             font-family: 'Orbitron', monospace;
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
             font-weight: 900;
             background: var(--gradient-primary);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
+            margin-top: 15px;
             letter-spacing: 3px;
-            text-shadow: 0 0 30px rgba(255, 216, 44, 0.5);
+            text-align: center;
             animation: titlePulse 2s ease-in-out infinite alternate;
         }
 
@@ -425,8 +458,12 @@
                 display: none;
             }
             
-            .title {
-                font-size: 2.5rem;
+            .main-logo {
+                width: 120px;
+            }
+            
+            .main-logo-text {
+                font-size: 1.8rem;
             }
             
             .buttons-container a {
@@ -513,7 +550,10 @@
 
         <main>
             <div class="main_info animate-fade-in-left">
-                <h1 class="title">NARUTO 5D<br>SoulsLike</h1>
+                <div class="main-logo-container">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzAiIGhlaWdodD0iNzAiIHZpZXdCb3g9IjAgMCA3MCA3MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzUiIGN5PSIzNSIgcj0iMzUiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik0yNSAxNUw0NSAzNUwyNSA1NVYxNVoiIGZpbGw9IiNGRkY2RTciLz4KPGR2Zz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDBfbGluZWFyXzFfMSIgeDE9IjAiIHkxPSIwIiB4Mj0iNzAiIHkyPSI3MCI+CjxzdG9wIHN0b3AtY29sb3I9IiNGRkQ4MkMiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjREEyNDQ4Ii8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+" alt="Naruto 5D Logo" class="main-logo">
+                    <span class="main-logo-text">NARUTO 5D<br>SOULSLIKE</span>
+                </div>
                 
                 <p>
                     Sua jornada no mundo shinobi está prestes a começar! Com o <strong>Naruto 5D SoulsLike</strong>, a experiência é elevada a um novo nível de desafio e imersão. Baixe agora os pacotes e prepare-se para a aventura!
@@ -562,25 +602,3 @@
 
         // Inicializar
         document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-            
-            // Adicionar listener para parallax
-            window.addEventListener('scroll', handleParallax);
-            
-            // Adicionar efeito de hover nos botões
-            const buttons = document.querySelectorAll('.buttons-container a');
-            buttons.forEach(button => {
-                button.addEventListener('mouseenter', function() {
-                    this.style.transform = this.classList.contains('btn-principal') 
-                        ? 'perspective(500px) rotateX(0deg) translateY(-8px) scale(1.08)' 
-                        : 'perspective(500px) rotateX(0deg) translateY(-8px) scale(1.08)';
-                });
-                
-                button.addEventListener('mouseleave', function() {
-                    this.style.transform = 'perspective(500px) rotateX(5deg) translateY(0) scale(1)';
-                });
-            });
-        });
-    </script>
-</body>
-</html>
