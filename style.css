@@ -2,7 +2,7 @@ body {
     background-image: url(imagens/imagem1.png);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: 0px 0px;
+    background-position: center center;
     background-color: rgb(34, 34, 34);
     color: rgb(255, 255, 255);
     text-align: top;
@@ -41,10 +41,21 @@ body {
     background-color: rgb(255, 196, 0);
 }
 
+/* NOVO ESTILO PARA O TÍTULO DO DOWNLOAD */
+.download-title {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-top: 20px; /* Espaço acima do título */
+    margin-bottom: -15px; /* Espaço entre o título e o primeiro botão */
+    color: #ffc400; /* Cor amarela/dourada para combinar */
+}
+
 .neon-bt {
     position: relative;
     display: inline-block;
-    padding: 15px 30px; /* Aumentei um pouco o padding para os botões ficarem mais destacados */
+    padding: 15px 30px;
     color: #ffffff;
     font-size: 16px;
     text-decoration: none;
