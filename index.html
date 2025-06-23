@@ -212,12 +212,16 @@
             filter: drop-shadow(var(--glow-yellow));
         }
 
-        /* === CONTEÚDO PRINCIPAL APRIMORADO === */
+        /* === CONTEÚDO PRINCIPAL CENTRALIZADO === */
         main {
             flex: 1;
             display: flex;
+            /* Alterações para centralizar */
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            /* Fim das alterações */
             width: 100%;
             max-width: 1440px;
             padding: 60px 0;
@@ -228,6 +232,10 @@
             width: 100%;
             max-width: 580px;
             position: relative;
+            /* Adicionado para garantir alinhamento interno */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .main_info::before {
@@ -262,7 +270,7 @@
         }
 
         .main-logo {
-            width: 250px; /* <--- VALOR ALTERADO */
+            width: 250px;
             height: auto;
             filter: drop-shadow(var(--glow-yellow)) drop-shadow(0 0 40px rgba(255, 216, 44, 0.8));
             transition: all 0.3s ease;
@@ -285,26 +293,6 @@
             filter: drop-shadow(var(--glow-red)) drop-shadow(0 0 80px rgba(218, 36, 72, 1));
         }
 
-        /* O seletor .main-logo-text pode ser removido, mas não há problema em deixá-lo */
-        .main-logo-text {
-            font-family: 'Orbitron', monospace;
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
-            font-weight: 900;
-            background: var(--gradient-primary);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-top: 15px;
-            letter-spacing: 3px;
-            text-align: center;
-            animation: titlePulse 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes titlePulse {
-            0% { filter: brightness(1) drop-shadow(0 0 10px rgba(255, 216, 44, 0.5)); }
-            100% { filter: brightness(1.2) drop-shadow(0 0 20px rgba(255, 216, 44, 0.8)); }
-        }
-
         .main_info p {
             font-size: 18px;
             line-height: 1.8;
@@ -322,7 +310,8 @@
         .buttons-container {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            /* Alterado para alinhar no centro */
+            align-items: center;
             gap: 20px;
         }
 
@@ -384,71 +373,13 @@
         }
 
         /* === IMAGENS APRIMORADAS === */
-        .img_container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex: 1;
-            position: relative;
-        }
-
-        .img_container img {
-            filter: drop-shadow(0 0 30px rgba(255, 216, 44, 0.3));
-            transition: all 0.3s ease;
-        }
-
-        .img_container:hover img {
-            transform: scale(1.05) rotate(2deg);
-            filter: drop-shadow(0 0 40px rgba(255, 216, 44, 0.5));
-        }
-
+        /* Imagem do personagem foi removida da visualização para manter o foco central */
         .character-image {
-            position: relative;
-            z-index: 2;
+            display: none;
         }
-
-        .character-image::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 120%;
-            height: 120%;
-            background: radial-gradient(circle, 
-                rgba(255, 216, 44, 0.1) 0%, 
-                rgba(218, 36, 72, 0.1) 50%, 
-                transparent 70%);
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            animation: rotate 10s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes rotate {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
+        
         /* === RESPONSIVIDADE APRIMORADA === */
-        @media (max-width: 1024px) {
-            main {
-                flex-direction: column;
-                justify-content: center;
-                text-align: center;
-                gap: 3rem;
-            }
-            
-            .main_info {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .character-image {
-                display: none;
-            }
-        }
-
+        /* As regras de responsividade principais agora estão no CSS padrão, simplificando o código */
         @media (max-width: 768px) {
             header {
                 padding: 16px 20px;
@@ -460,11 +391,7 @@
             }
             
             .main-logo {
-                width: 180px; /* Ajuste para telas menores também */
-            }
-            
-            .main-logo-text {
-                font-size: 1.8rem;
+                width: 180px;
             }
             
             .buttons-container a {
@@ -496,17 +423,6 @@
             }
         }
 
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
         .animate-fade-in-up {
             animation: fadeInUp 1s ease-out;
         }
@@ -515,9 +431,6 @@
             animation: fadeInLeft 1s ease-out 0.2s both;
         }
 
-        .animate-fade-in-right {
-            animation: fadeInRight 1s ease-out 0.4s both;
-        }
     </style>
 </head>
 <body>
@@ -552,7 +465,6 @@
         <main>
             <div class="main_info animate-fade-in-left">
                 <div class="main-logo-container">
-                    <!-- TEXTO REMOVIDO DAQUI -->
                     <img src="imagens/logo.png" alt="Naruto 5D Logo" class="main-logo">
                 </div>
                 
@@ -567,8 +479,9 @@
                 </div>
             </div>
             
-            <div class="img_container character-image animate-fade-in-right">
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgwIiBoZWlnaHQ9IjQ4MCIgdmlld0JveD0iMCAwIDQ4MCA0ODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0ODAiIGhlaWdodD0iNDgwIiByeD0iMjQwIiBmaWxsPSJ1cmwoI2dyYWRpZW50MF9saW5lYXJfMV8yKSIvPgo8Y2lyY2xlIGN4PSIyNDAiIGN5PSIyNDAiIHI9IjE4MCIgZmlsbD0idXJsKCNncmFkaWVudDFfcmFkaWFsXzFfMikiIG9wYWNpdHk9IjAuOCIvPgo8cGF0aCBkPSJNMTYwIDEyMEwyNDAgMjAwTDMyMCAxMjBMMjQwIDIwMEwzMjAgMjgwTDI0MCAyMDBMMTYwIDI4MEwyNDAgMjAwVjEyMFoiIGZpbGw9IiNGRkQ4MkMiLz4KPGR2Zz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDBfbGluZWFyXzFfMiIgeDE9IjAiIHkxPSIwIiB4Mj0iNDgwIiB5Mj0iNDgwIj4KPHN0b3Agc3RvcC1jb2xvcj0iI0ZGNkIzNSIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNEQTI0NDgiLz4KPC9saW5lYXJHcmFkaWVudD4KPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkaWVudDFfcmFkaWFsXzFfMiIgY3g9IjAuNSIgY3k9IjAuNSIgcj0iMC41Ij4KPHN0b3Agc3RvcC1jb2xvcj0iI0ZGRDgyQyIgc3RvcC1vcGFjaXR5PSIwLjMiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjREEyNDQ4IiBzdG9wLW9wYWNpdHk9IjAuMSIvPgo8L3JhZGlhbEdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPg==" alt="Personagem Naruto" width="480px">
+            <!-- A imagem do personagem ainda está no HTML, mas está invisível graças ao CSS -->
+            <div class="img_container character-image">
+                <img src="data:image/svg+xml;base64,..." alt="Personagem Naruto" width="480px">
             </div>
         </main>
     </div>
