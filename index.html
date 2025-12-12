@@ -21,7 +21,7 @@
             --yellow: rgb(255, 216, 44);
             --orange: #ff6b35;
             --dark-blue: #0a0c10;
-            --gradient-primary: linear-gradient(135deg, #ff6b35 0%, #da2448ff 50%, #8b1538 100%);
+            --gradient-primary: linear-gradient(135deg, #da2448ff 0%, #8b1538 100%);
             --gradient-secondary: linear-gradient(135deg, #ffd82c 0%, #ff6b35 100%);
             --glow-yellow: 0 0 20px rgba(255, 216, 44, 0.5);
             --glow-red: 0 0 30px rgba(218, 36, 72, 0.6);
@@ -132,7 +132,7 @@
             justify-content: space-between;
             width: 100%;
             max-width: 1440px;
-            padding: 24px 0;
+            padding: 24px 32px;
             backdrop-filter: blur(10px);
             border-radius: 0 0 20px 20px;
             background: rgba(10, 12, 16, 0.3);
@@ -169,45 +169,21 @@
             letter-spacing: 2px;
         }
 
-        ul {
-            list-style-type: none;
-        }
-
-        .navigation {
+        .navigation_social {
             display: flex;
             align-items: center;
-            gap: 48px;
-        }
-
-        .navigation_link {
-            font-size: 16px;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            position: relative;
-            transition: all 0.3s ease;
-            padding: 8px 16px;
-            border-radius: 25px;
-            background: rgba(255, 216, 44, 0.05);
-            backdrop-filter: blur(5px);
-        }
-
-        .navigation_link:hover {
-            color: var(--yellow);
-            background: rgba(255, 216, 44, 0.1);
-            box-shadow: var(--glow-yellow);
-            transform: translateY(-2px);
+            justify-content: center;
         }
 
         .navigation_social svg {
-            opacity: 0.7;
+            opacity: 0.8;
             transition: all 0.3s ease;
             filter: drop-shadow(0 0 5px rgba(255, 216, 44, 0.3));
         }
 
         .navigation_social a:hover svg {
             opacity: 1;
-            transform: translateY(-5px) scale(1.2);
+            transform: translateY(-3px) scale(1.15);
             color: var(--yellow);
             filter: drop-shadow(var(--glow-yellow));
         }
@@ -216,12 +192,10 @@
         main {
             flex: 1;
             display: flex;
-            /* Alterações para centralizar */
             align-items: center;
             justify-content: center;
             flex-direction: column;
             text-align: center;
-            /* Fim das alterações */
             width: 100%;
             max-width: 1440px;
             padding: 60px 0;
@@ -230,9 +204,8 @@
 
         .main_info {
             width: 100%;
-            max-width: 580px;
+            max-width: 700px;
             position: relative;
-            /* Adicionado para garantir alinhamento interno */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -306,21 +279,171 @@
             border: 1px solid rgba(255, 216, 44, 0.1);
         }
 
-        /* === BOTÕES APRIMORADOS === */
+        /* === AVISO IMPORTANTE === */
+        .warning-box {
+            width: 100%;
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(218, 36, 72, 0.15) 0%, rgba(139, 21, 56, 0.15) 100%);
+            border: 2px solid rgba(218, 36, 72, 0.4);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(218, 36, 72, 0.3);
+            animation: warningPulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes warningPulse {
+            0% { 
+                box-shadow: 0 0 20px rgba(218, 36, 72, 0.3);
+                border-color: rgba(218, 36, 72, 0.4);
+            }
+            100% { 
+                box-shadow: 0 0 30px rgba(218, 36, 72, 0.5);
+                border-color: rgba(218, 36, 72, 0.6);
+            }
+        }
+
+        .warning-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--yellow);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .warning-title::before {
+            content: '⚠️';
+            font-size: 1.5rem;
+        }
+
+        .warning-content {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .warning-content strong {
+            color: var(--yellow);
+            font-weight: 600;
+        }
+
+        .warning-list {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .warning-list li {
+            margin: 8px 0;
+            list-style-type: none;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .warning-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--yellow);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* === SEÇÕES DE DOWNLOAD === */
+        .downloads-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            width: 100%;
+        }
+
+        .download-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 30px;
+            border-radius: 25px;
+            background: rgba(10, 12, 16, 0.5);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 216, 44, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(218, 36, 72, 0.05) 0%, 
+                rgba(139, 21, 56, 0.05) 100%);
+            z-index: -1;
+        }
+
+        .download-section.lite::before {
+            background: linear-gradient(135deg, 
+                rgba(255, 216, 44, 0.05) 0%, 
+                rgba(255, 107, 53, 0.05) 100%);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(218, 36, 72, 0.5);
+        }
+
+        .section-title.lite {
+            background: var(--gradient-secondary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-description {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
         .buttons-container {
             display: flex;
             flex-direction: column;
-            /* Alterado para alinhar no centro */
             align-items: center;
-            gap: 20px;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .buttons-row {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .buttons-container a {
             width: 100%;
-            max-width: 320px;
+            max-width: 280px;
             padding: 16px 24px;
             border-radius: 50px;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 600;
             text-align: center;
             text-transform: uppercase;
@@ -358,45 +481,146 @@
             box-shadow: 0 15px 35px rgba(218, 36, 72, 0.4), var(--glow-red);
         }
 
-        .btn-secundario {
-            background: rgba(255, 216, 44, 0.1);
-            border: 2px solid var(--yellow);
-            box-shadow: var(--glow-yellow);
-            transform: perspective(500px) rotateX(5deg);
-        }
-
-        .btn-secundario:hover {
+        .btn-lite {
             background: var(--gradient-secondary);
             color: #111;
+            box-shadow: var(--glow-yellow);
+            transform: perspective(500px) rotateX(5deg);
+            font-weight: 700;
+        }
+
+        .btn-lite:hover {
             transform: perspective(500px) rotateX(0deg) translateY(-5px) scale(1.05);
             box-shadow: 0 15px 35px rgba(255, 216, 44, 0.4), var(--glow-yellow);
         }
 
-        /* === IMAGENS APRIMORADAS === */
-        /* Imagem do personagem foi removida da visualização para manter o foco central */
-        .character-image {
-            display: none;
+        .btn-secundario {
+            background: rgba(139, 21, 56, 0.3);
+            border: 2px solid rgba(218, 36, 72, 0.5);
+            box-shadow: 0 0 15px rgba(218, 36, 72, 0.3);
+            transform: perspective(500px) rotateX(5deg);
         }
-        
+
+        .btn-secundario:hover {
+            background: rgba(139, 21, 56, 0.6);
+            border-color: var(--red);
+            transform: perspective(500px) rotateX(0deg) translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(218, 36, 72, 0.4), var(--glow-red);
+        }
+
+        /* === DIVISOR === */
+        .divider {
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 216, 44, 0.5) 50%, 
+                transparent 100%);
+            margin: 20px 0;
+        }
+
         /* === RESPONSIVIDADE APRIMORADA === */
-        /* As regras de responsividade principais agora estão no CSS padrão, simplificando o código */
         @media (max-width: 768px) {
+            #app {
+                padding: 0 16px;
+            }
+
             header {
                 padding: 16px 20px;
                 border-radius: 0 0 15px 15px;
             }
-            
-            .navigation {
-                display: none;
+
+            .logo-container img {
+                width: 50px;
+            }
+
+            .logo-text {
+                font-size: 1rem;
+            }
+
+            .navigation_social svg {
+                width: 24px;
+                height: 24px;
             }
             
             .main-logo {
                 width: 180px;
             }
+
+            .main_info p {
+                font-size: 16px;
+                padding: 16px;
+            }
+
+            .download-section {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+
+            .warning-box {
+                padding: 16px 20px;
+                margin: 15px 0;
+            }
+
+            .warning-title {
+                font-size: 1.1rem;
+            }
+
+            .warning-content {
+                font-size: 14px;
+            }
+
+            .warning-list li {
+                font-size: 14px;
+            }
+
+            .buttons-row {
+                flex-direction: column;
+                align-items: center;
+            }
             
             .buttons-container a {
-                max-width: 280px;
-                font-size: 16px;
+                max-width: 100%;
+                font-size: 15px;
+                padding: 14px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 0.9rem;
+                letter-spacing: 1px;
+            }
+
+            .main-logo {
+                width: 150px;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .buttons-container a {
+                font-size: 14px;
+                padding: 12px 18px;
+            }
+        }
+
+        /* Tablet */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            header {
+                padding: 20px 28px;
+            }
+
+            .main-logo {
+                width: 220px;
+            }
+
+            .buttons-container a {
+                max-width: 260px;
             }
         }
 
@@ -446,12 +670,6 @@
                 <img src="imagens/logo.png" alt="Logo do Mod">
                 <span class="logo-text">NARUTO 5D</span>
             </div>
-            
-            <ul class="navigation">
-                <li>
-                    <a href="#" class="navigation_link">Home</a>
-                </li>
-            </ul>
 
             <div class="navigation_social">
                 <a href="https://www.youtube.com/c/porkinplay" target="_blank" title="Canal do Criador">
@@ -469,19 +687,57 @@
                 </div>
                 
                 <p>
-                    Sua jornada no mundo shinobi está prestes a começar! Com o <strong>Naruto 5D SoulsLike</strong>, a experiência é elevada a um novo nível de desafio e imersão. Baixe agora os pacotes e prepare-se para a aventura!
+                    Sua jornada no mundo shinobi está prestes a começar! Com o <strong>Naruto 5D SoulsLike</strong>, a experiência é elevada a um novo nível de desafio e imersão. Escolha entre a versão completa ou a versão Lite e prepare-se para a aventura!
                 </p>
 
-                <div class="buttons-container">
-                    <a class="btn-principal" href="https://4br.me/BehaviorNaruto5DTobiUpdate" target="_blank">📥 Behavior Pack</a>
-                    <a class="btn-principal" href="https://4br.me/ResourceNaruto5DTobiUpdateee" target="_blank">📥 Resource Pack</a>
-                    <a class="btn-secundario" href="https://addons-for-mcpe.github.io/Download/" target="_blank">Versão Antiga</a>
+                <!-- AVISO IMPORTANTE -->
+                <div class="warning-box">
+                    <div class="warning-title">Requisitos Importantes</div>
+                    <div class="warning-content">
+                        <p>Para garantir o funcionamento correto do addon:</p>
+                        <ul class="warning-list">
+                            <li><strong>Versão do Minecraft:</strong> 1.21.130 ou superior</li>
+                            <li><strong>Experimentos:</strong> Ative TODAS as opções de jogabilidade experimental</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            
-            <!-- A imagem do personagem ainda está no HTML, mas está invisível graças ao CSS -->
-            <div class="img_container character-image">
-                <img src="data:image/svg+xml;base64,..." alt="Personagem Naruto" width="480px">
+
+                <div class="downloads-wrapper">
+                    <!-- VERSÃO COMPLETA -->
+                    <div class="download-section">
+                        <h2 class="section-title">🔥 Versão Completa</h2>
+                        <p class="section-description">A experiência completa do Naruto 5D com todos os recursos, jutsus e conteúdos disponíveis.</p>
+                        
+                        <div class="buttons-container">
+                            <div class="buttons-row">
+                                <a class="btn-principal" href="https://4br.me/BehaviorNaruto5DTobiUpdate" target="_blank">📥 Behavior Pack</a>
+                                <a class="btn-principal" href="https://4br.me/ResourceNaruto5DTobiUpdateee" target="_blank">📥 Resource Pack</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- VERSÃO LITE -->
+                    <div class="download-section lite">
+                        <h2 class="section-title lite">⚡ Versão Lite</h2>
+                        <p class="section-description">Versão otimizada e mais leve para dispositivos com desempenho limitado, mantendo o essencial da experiência.</p>
+                        
+                        <div class="buttons-container">
+                            <div class="buttons-row">
+                                <a class="btn-lite" href="#" target="_blank">📥 Behavior Pack Lite</a>
+                                <a class="btn-lite" href="#" target="_blank">📥 Resource Pack Lite</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- VERSÃO ANTIGA -->
+                    <div class="buttons-container">
+                        <a class="btn-secundario" href="https://addons-for-mcpe.github.io/Download/" target="_blank">📦 Versão Antiga</a>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
@@ -503,28 +759,10 @@
             }
         }
 
-        // Efeito parallax suave
-        function handleParallax() {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.character-image img');
-            
-            parallaxElements.forEach(element => {
-                const speed = 0.1;
-                element.style.transform = `translateY(${scrolled * speed}px) scale(1.05)`;
-            });
-        }
-
         // Inicializar
         document.addEventListener('DOMContentLoaded', function() {
             createParticles();
-            window.addEventListener('scroll', handleParallax);
         });
     </script>
 </body>
 </html>
-
-
-
-
-
-
